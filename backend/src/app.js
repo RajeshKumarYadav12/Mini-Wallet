@@ -21,6 +21,30 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// For Vercel serverless - connect to DB on each request
+let dbConnected = false;
+const ensureDbConnection = async () => {
+  if (!dbConnected) {
+    const { connectDB } = require("./config/db");
+    await connectDB();
+    dbConnected = true;
+  }
+};
+
+// Middleware to ensure DB connection (must be before routes)
+app.use(async (req, res, next) => {
+  try {
+    await ensureDbConnection();
+    next();
+  } catch (error) {
+    console.error("Database connection error:", error);
+    return res.status(503).json({
+      success: false,
+      error: "Service temporarily unavailable",
+    });
+  }
+});
+
 // Request logging middleware (development)
 if (process.env.NODE_ENV === "development") {
   app.use((req, res, next) => {
