@@ -1,4 +1,4 @@
-Mini-Wallet Service 💳
+Mini-Wallet Service 
 
 A simple internal wallet system where users can create accounts, check balances, and transfer money securely.
 This project demonstrates clean code, transactional integrity, and full-stack implementation.
@@ -75,7 +75,7 @@ npm run dev
 
 Frontend will run at:
 
-http://localhost:5173
+http://localhost:3001
 
 🔁 API Endpoints (Backend)
 Method	Endpoint	Description
@@ -97,3 +97,4 @@ Clear HTTP status codes for failures
 ✅ Notes
 
 This project was completed within the given time constraints and fully satisfies all required and bonus criteria, including frontend implementation and testing.
+
